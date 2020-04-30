@@ -10,10 +10,10 @@ export default function Tabbar() {
     <Router>
       <div id="site-wrapper">
         <Switch>
-          <Route exact path="/profile" component={Profile}></Route>
-          <Route exact path="/calculator" component={Calculator}></Route>
-          <Route exact path="/formulasheet" component={Formulasheet}></Route>
-          <Route exact path="/chat" component={App}></Route>
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/calculator" component={Calculator} />
+          <Route exact path="/formulasheet" component={Formulasheet} />
+          <Route exact path="/chat" component={App} />
         </Switch>
         <div id="tab-bar">
           <div>
@@ -26,21 +26,21 @@ export default function Tabbar() {
           <div>
             <Link to="/calculator">
               <button>
-                <img src="/icons/calculator-5-512.png" alt="profile"></img>
+                <img src="/icons/calculator-5-512.png" alt="calculator"></img>
               </button>
             </Link>
           </div>
           <div>
             <Link to="/chat">
               <button>
-                <img src="/icons/chat-4-512.png" alt="profile"></img>
+                <img src="/icons/chat-4-512.png" alt="chat"></img>
               </button>
             </Link>
           </div>
           <div>
             <Link to="/formulasheet">
               <button>
-                <img src="/icons/note-2-512.png" alt="profile"></img>
+                <img src="/icons/note-2-512.png" alt="formula sheet"></img>
               </button>
             </Link>
           </div>
