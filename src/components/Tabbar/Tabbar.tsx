@@ -17,32 +17,32 @@ export default function Tabbar() {
         </Switch>
         <div id="tab-bar">
           <div>
-            <button>
-              <Link to="/profile">
+            <Link to="/profile">
+              <button>
                 <img src="/icons/student-512.png" alt="profile"></img>
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
           <div>
-            <button>
-              <Link to="/calculator">
+            <Link to="/calculator">
+              <button>
                 <img src="/icons/calculator-5-512.png" alt="profile"></img>
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
           <div>
-            <button>
-              <Link to="/chat">
+            <Link to="/chat">
+              <button>
                 <img src="/icons/chat-4-512.png" alt="profile"></img>
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
           <div>
-            <button>
-              <Link to="/formulasheet">
+            <Link to="/formulasheet">
+              <button>
                 <img src="/icons/note-2-512.png" alt="profile"></img>
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
