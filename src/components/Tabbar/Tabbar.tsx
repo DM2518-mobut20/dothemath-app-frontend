@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
+import Calculator from '../Calculator/Calculator';
 
 export default function Tabbar() {
   return (
@@ -8,6 +9,7 @@ export default function Tabbar() {
       <div id="site-wrapper">
         <Switch>
           <Route exact path="/profile" component={Profile}></Route>
+          <Route exact path="/calculator" component={Calculator}></Route>
         </Switch>
         <div id="tab-bar">
           <div>
@@ -19,7 +21,9 @@ export default function Tabbar() {
           </div>
           <div>
             <button>
-              <img src="/icons/calculator-5-512.png" alt="profile"></img>
+              <Link to="/calculator">
+                <img src="/icons/calculator-5-512.png" alt="profile"></img>
+              </Link>
             </button>
           </div>
           <div>
