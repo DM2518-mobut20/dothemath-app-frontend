@@ -5,7 +5,6 @@ import * as api from '../../api';
 import Chat from '../Chat';
 import LoadingIndicator from '../LoadingIndicator';
 import { useCookie } from '../../useCookie';
-//import ErrorBoundary from './ErrorBoundary';
 
 export default function ChatApp() {
   const [name, setName] = useCookie('name');
@@ -110,7 +109,6 @@ export default function ChatApp() {
   const blurChat = showPopup || showSubjectList || loading;
 
   return (
-    //<ErrorBoundary>
     <div>
       {loading && <LoadingIndicator loading />}
       {showPopup && <Popup onComplete={setName} />}
@@ -127,6 +125,5 @@ export default function ChatApp() {
         />
       </div>
     </div>
-    //</ErrorBoundary>
   );
 }
