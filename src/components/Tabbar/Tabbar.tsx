@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import Calculator from '../Calculator/Calculator';
 import Formulasheet from '../Formulasheet/Formulasheet';
-import App from '../../App';
+import ChatApp from '../ChatApp/ChatApp';
 
 export default function Tabbar() {
   return (
@@ -13,7 +13,7 @@ export default function Tabbar() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/calculator" component={Calculator} />
           <Route exact path="/formulasheet" component={Formulasheet} />
-          <Route exact path="/chat" component={App} />
+          <Route exact path="/chat" component={ChatApp} />
         </Switch>
         <div id="tab-bar">
           <div>
