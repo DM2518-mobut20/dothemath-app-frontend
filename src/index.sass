@@ -8,9 +8,14 @@ $primary-color: #4882ff
     box-sizing: border-box
     margin: 0
     padding: 0
+*:before,
+*:after 
+    box-sizing: border-box;
 
 html
     -webkit-text-size-adjust: none
+    height: 100%
+    position: relative
 
 body
     background-size: cover
@@ -155,12 +160,16 @@ button
 #window-wrapper
     overflow: hidden
     width: 100%
-    height: 95%
+    height: 100%
+    padding-bottom: 54px
     padding: 1rem 20vw
     position: fixed
     display: flex
     flex-direction: column
     align-items: center
+    min-height: 100vh
+    position: relative;
+    padding-bottom: 80px;
     h2
         margin-bottom: .5rem
         font-size: 2.5rem
