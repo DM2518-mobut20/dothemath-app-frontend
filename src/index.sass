@@ -66,9 +66,13 @@ button
 
 #calculator-wrapper
     height: 100%
+    width: 100%
     display: flex
+    padding-bottom: 64px
+    position: absolute
     iframe
-        height: 420px
+        height: 100%
+        bottom: 0
 
 #tab-bar
     display: flex
@@ -424,6 +428,9 @@ button
         button 
             img
                 width: 30px
+
+    #calculator-wrapper
+        padding-bottom: 44px
 
 @media screen and ( max-width: 470px )
     #popup-container
