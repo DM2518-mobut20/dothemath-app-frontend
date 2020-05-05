@@ -9,9 +9,7 @@ export default function Calculator() {
         id="calculator"
         src="https://web2.0calc.com/widgets/416877538f92/"
         scrolling="no"
-      >
-        {' '}
-      </iframe>
+      ></iframe>
     </div>
   );
 }
