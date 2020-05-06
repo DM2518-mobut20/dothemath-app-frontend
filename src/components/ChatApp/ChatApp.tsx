@@ -73,10 +73,21 @@ export default function ChatApp() {
   function onSendMessage(text: string, image?: File) {
     let isFirstMessage = messages.length === 0;
     let isFirstMessageEver = allChats === undefined;
-    console.log(isFirstMessageEver);
     api.sendMessage(text, image).then((threadId) => {
       if (isFirstMessage) {
         setThreadId(threadId);
+        if (isFirstMessageEver) {
+          setAllChats('{ "allThreadIds" : [], "allChannelIds" : [] }');
+        } else {
+          let allChatsObject = allChats;
+          allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat(
+            threadId
+          );
+          allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat(
+            channelId
+          );
+          setAllChats(allChatsObject);
+        }
       }
     });
 
