@@ -82,6 +82,9 @@ export default function ChatApp() {
         allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat(
           channelId
         );
+        allChatsObject.checkbox = allChatsObject.checkbox.concat(false);
+        allChatsObject.text = allChatsObject.text.concat(text);
+        allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         setAllChats(allChatsObject);
         console.log(allChats);
       }
