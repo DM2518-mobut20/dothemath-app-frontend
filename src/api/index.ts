@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const socket = io('https://cd3ad028.ngrok.io');
+const socket = io('https://e27bccce.ngrok.io');
 
 export function getSubjects(cb) {
   socket.emit('get_channels', cb);
