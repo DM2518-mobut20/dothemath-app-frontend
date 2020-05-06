@@ -10,10 +10,9 @@ export default function ChatApp() {
   const [name, setName] = useCookie('name');
   const [threadId, setThreadId] = useCookie('threadId');
   const [channelId, setChannelId] = useCookie('channelId');
-
+  const [allChats, setAllChats] = useCookie('allChats');
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([] as api.OnMessageCallbackData[]);
-
   const [subjects, setSubjects] = useState([] as api.Subject[]);
   useEffect(() => api.getSubjects(setSubjects), []);
 
@@ -50,6 +49,12 @@ export default function ChatApp() {
   }, []);
 
   function onSubjectSelect(subject: api.Subject) {
+    let firstVisit = allChats === undefined;
+    if (firstVisit) {
+      setAllChats(
+        '{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkbox" : []}'
+      );
+    }
     setChannelId(subject.id);
     setLoading(true);
 
@@ -70,6 +75,18 @@ export default function ChatApp() {
     api.sendMessage(text, image).then((threadId) => {
       if (isFirstMessage) {
         setThreadId(threadId);
+        let allChatsObject = allChats;
+        allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat(
+          threadId
+        );
+        allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat(
+          channelId
+        );
+        allChatsObject.checkbox = allChatsObject.checkbox.concat(false);
+        allChatsObject.text = allChatsObject.text.concat(text);
+        allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
+        setAllChats(allChatsObject);
+        console.log(allChats);
       }
     });
 
