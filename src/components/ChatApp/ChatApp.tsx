@@ -49,7 +49,7 @@ export default function ChatApp() {
     let firstVisit = allChats === undefined;
     if (firstVisit) {
       setAllChats(
-        '{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "image-url" : [], "checkbox" : []}'
+        '{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkbox" : []}'
       );
     }
     setChannelId(subject.id);
@@ -79,6 +79,9 @@ export default function ChatApp() {
         allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat(
           channelId
         );
+        allChatsObject.checkbox = allChatsObject.checkbox.concat(false);
+        allChatsObject.text = allChatsObject.text.concat(text);
+        allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         setAllChats(allChatsObject);
         console.log(allChats);
       }
