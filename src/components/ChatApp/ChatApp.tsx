@@ -10,18 +10,17 @@ export default function ChatApp() {
   const [name, setName] = useCookie('name');
   const [threadId, setThreadId] = useCookie('threadId');
   const [channelId, setChannelId] = useCookie('channelId');
-
+  const [allChats, setAllChats] = useCookie('allChats');
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([] as api.OnMessageCallbackData[]);
-
   const [subjects, setSubjects] = useState([] as api.Subject[]);
   useEffect(() => api.getSubjects(setSubjects), []);
 
   // runs when app first loads, reestablishes session if possible
   useEffect(() => {
-    if (channelId && !threadId) {
-      setChannelId('');
-    }
+    // if (channelId && !threadId) {
+    //   setChannelId('');
+    // }
     if (threadId && channelId) {
       api
         .reestablishSession(channelId, threadId)
@@ -67,9 +66,19 @@ export default function ChatApp() {
 
   function onSendMessage(text: string, image?: File) {
     let isFirstMessage = messages.length === 0;
+    let isFirstMessageEver = allChats === undefined;
+    console.log(isFirstMessageEver);
     api.sendMessage(text, image).then((threadId) => {
       if (isFirstMessage) {
         setThreadId(threadId);
+        if (isFirstMessageEver) {
+          setAllChats('{ "allThreadIds" : [], "allChannelIds" : [] }');
+        } else {
+          let allChatsObject = JSON.parse(allChats);
+          allChatsObject = allChatsObject.allThreadIds.concat(threadId);
+          allChatsObject = allChatsObject.allChannelIds.concat(channelId);
+          setAllChats(JSON.stringify(allChatsObject));
+        }
       }
     });
 
