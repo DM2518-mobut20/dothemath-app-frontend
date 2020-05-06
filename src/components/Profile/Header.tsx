@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AvatarModal from './AvatarModal';
+
+const toggleAvatarModal = (toggle, setToggle) => {
+  if (toggle === 'none') {
+    setToggle('block');
+  } else {
+    setToggle('none');
+  }
+};
+
+const changeAvatar = (avatarImgUrl, setCurrentAvatar) => {
+  setCurrentAvatar(avatarImgUrl);
+};
 
 export default function Header(props) {
+  const [toggle, setToggle] = useState('none');
+  const [currentAvatar, setCurrentAvatar] = useState(props.imgsrc);
   return (
     <div id="profile-header">
-      <div id="profile-picture-wrapper">
-        <img id="profile-picture" src={props.imgsrc} alt="profile" />
+      <AvatarModal
+        toggle={toggle}
+        changeAvatar={changeAvatar}
+        setCurrentAvatar={setCurrentAvatar}
+      />
+      <div
+        id="profile-picture-wrapper"
+        onClick={() => toggleAvatarModal(toggle, setToggle)}
+      >
+        <img id="profile-picture" src={currentAvatar} alt="profile" />
       </div>
       <div id="profile-info">
         <div id="profile-nameplate">
