@@ -86,7 +86,7 @@ export default function ChatApp() {
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         setAllChats(allChatsObject);
-        console.log(allChats);
+        //console.log(allChats);
       }
     });
 

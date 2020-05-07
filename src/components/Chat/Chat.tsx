@@ -20,10 +20,18 @@ export default function Chat(props: ChatProps) {
   return (
     <div id="window-wrapper">
       <div id="title-container">
-        <h2 id="subject-title">{props.subject?.name}</h2>
         <button onClick={props.onNewQuestionClick} id="new-question-button">
           Ask New Question
         </button>
+        <h2 id="subject-title">{props.subject?.name}</h2>
+        {true ? (
+          <button id="chat-checkmark" className="profile-item-checkmark" />
+        ) : (
+          <button
+            id="chat-empty-checkmark"
+            className="profile-item-emptycheckmark"
+          />
+        )}
       </div>
       <div id="content-wrapper">
         <div id="chat-wrapper">

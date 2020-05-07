@@ -321,7 +321,7 @@ button
     min-height: 100vh
     padding-bottom: 80px
     h2
-        margin-bottom: .5rem
+        margin-bottom: -0.5rem
         font-size: 2.5rem
 
 #logo
@@ -466,13 +466,20 @@ button
 
 #subject-title
     display: inline
+    color: #ff00c8
+    align-self: flex-end
+    margin: 0
 
 #title-container
     width: 800px
     padding: 10px 0px
-    display: inline-block
-    text-align: center
-
+    display: flex
+    justify-content: space-between
+    align-items: center
+    #chat-checkmark
+        height: 50px
+        width: 50px
+        margin: 0px
 #new-question-button
     background-color: $primary-color
     background-repeat: no-repeat
