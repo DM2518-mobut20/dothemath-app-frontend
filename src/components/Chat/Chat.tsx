@@ -24,7 +24,7 @@ export default function Chat(props: ChatProps) {
     <div id="window-wrapper">
       <div id="title-container">
         <button onClick={props.onNewQuestionClick} id="new-question-button">
-          Ask New Question
+          New Question
         </button>
         <h2 id="subject-title">{props.subject?.name}</h2>
         {props.allChats === undefined ? (
