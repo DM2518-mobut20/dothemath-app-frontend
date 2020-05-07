@@ -52,7 +52,7 @@ export default function ChatApp(props) {
     let firstVisit = allChats === undefined;
     if (firstVisit) {
       setAllChats(
-        '{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : []}'
+        `{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : [${false}]}`
       );
     }
     setChannelId(subject.id);
@@ -76,17 +76,11 @@ export default function ChatApp(props) {
       if (isFirstMessage) {
         setThreadId(threadId);
         let allChatsObject = allChats;
-        allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat(
-          threadId
-        );
-        allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat(
-          channelId
-        );
-        allChatsObject.checkmark = allChatsObject.checkmark.concat(false);
+        allChatsObject.allThreadIds[props.index] = threadId;
+        allChatsObject.allChannelIds[props.index] = channelId;
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         setAllChats(allChatsObject);
-        props.setIndex(allChatsObject.allThreadIds.length);
         console.log(props.index);
         console.log(allChats);
       }
@@ -118,13 +112,26 @@ export default function ChatApp(props) {
     setChannelId('');
     setThreadId('');
     setMessages([]);
+    let allChatsObject = allChats;
+    allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat('');
+    allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat('');
+    allChatsObject.checkmark = allChatsObject.checkmark.concat(false);
+    props.setIndex(allChatsObject.allThreadIds.length - 1);
+    setAllChats(allChatsObject);
+    console.log(allChats);
     api.cancelSession();
   }
   function onCheckmark() {
     let allChatsObject = allChats;
     allChatsObject.checkmark[props.index] = true;
+    // if (allChatsObject.allThreadIds.length === 1) {
+    //   allChatsObject.checkmark[props.index] = true;
+    // } else {
+    //   allChatsObject.checkmark[props.index - 1] = true;
+    // }
     setAllChats(allChatsObject);
     console.log(allChats);
+    console.log(props.index);
   }
   const subject = subjects.find((s) => s.id === channelId);
 
