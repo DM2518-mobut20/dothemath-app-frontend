@@ -20,6 +20,23 @@ interface ChatProps {
 export default function Chat(props: ChatProps) {
   const { messages } = props;
 
+  const emptyCheckmark = (
+    <button
+      id="chat-empty-checkmark"
+      className="profile-item-emptycheckmark"
+      onClick={props.onCheckmarkClick}
+    />
+  );
+  const checkedCheckmark = (
+    <button id="chat-checkmark" className="profile-item-checkmark" />
+  );
+  function displayCheckmark(bool) {
+    if (bool) {
+      return checkedCheckmark;
+    } else {
+      return emptyCheckmark;
+    }
+  }
   return (
     <div id="window-wrapper">
       <div id="title-container">
@@ -27,21 +44,11 @@ export default function Chat(props: ChatProps) {
           New Question
         </button>
         <h2 id="subject-title">{props.subject?.name}</h2>
-        {props.allChats === undefined ? (
-          <button
-            id="chat-empty-checkmark"
-            className="profile-item-emptycheckmark"
-            onClick={props.onCheckmarkClick}
-          />
-        ) : props.allChats.checkmark[props.index] ? (
-          <button id="chat-checkmark" className="profile-item-checkmark" />
-        ) : (
-          <button
-            id="chat-empty-checkmark"
-            className="profile-item-emptycheckmark"
-            onClick={props.onCheckmarkClick}
-          />
-        )}
+        {props.allChats === undefined
+          ? displayCheckmark(false)
+          : props.allChats.checkmark[props.index]
+          ? displayCheckmark(true)
+          : displayCheckmark(false)}
       </div>
       <div id="content-wrapper">
         <div id="chat-wrapper">
