@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from './Item';
+import Header from './Header';
 
 export default function Profile() {
   // Temporary posts-data before we get real data from the backend
@@ -36,6 +37,9 @@ export default function Profile() {
     },
   ];
 
+  const profilePic =
+    'https://cdn.mos.cms.futurecdn.net/xYiTisbsp2HZPVupAZoNYQ-650-80.jpg';
+
   const items = posts.map((post) => {
     return (
       <Item
@@ -46,5 +50,11 @@ export default function Profile() {
       />
     );
   });
-  return <div id="profile-wrapper">{items}</div>;
+
+  return (
+    <div>
+      <Header name="iRob#1337" level={19} imgsrc={profilePic} />
+      <div id="profile-wrapper">{items}</div>
+    </div>
+  );
 }
