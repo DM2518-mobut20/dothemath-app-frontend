@@ -124,11 +124,6 @@ export default function ChatApp(props) {
   function onCheckmark() {
     let allChatsObject = allChats;
     allChatsObject.checkmark[props.index] = true;
-    // if (allChatsObject.allThreadIds.length === 1) {
-    //   allChatsObject.checkmark[props.index] = true;
-    // } else {
-    //   allChatsObject.checkmark[props.index - 1] = true;
-    // }
     setAllChats(allChatsObject);
     console.log(allChats);
     console.log(props.index);
