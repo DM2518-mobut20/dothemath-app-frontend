@@ -26,7 +26,16 @@ export default function Tabbar() {
           <Route exact path="/calculator" component={Calculator} />
           <Route exact path="/formulasheet" component={Formulasheet} />
           <Route exact path="/chat">
-            <ChatApp index={index} setIndex={setIndexOnNewMessage} />
+            <ChatApp
+              index={index}
+              setIndex={setIndexOnNewMessage}
+              threadId={threadId}
+              setThreadId={setThreadIdChild}
+              channelId={channelId}
+              setChannelId={setChannelIdChild}
+              allChats={allChats}
+              setAllChats={setAllChatsChild}
+            />
           </Route>
         </Switch>
         <div id="tab-bar">
