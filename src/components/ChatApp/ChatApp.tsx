@@ -8,9 +8,6 @@ import { useCookie } from '../../useCookie';
 
 export default function ChatApp(props) {
   const [name, setName] = useCookie('name');
-  const [threadId, setThreadId] = useCookie('threadId');
-  const [channelId, setChannelId] = useCookie('channelId');
-  const [allChats, setAllChats] = useCookie('allChats');
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([] as api.OnMessageCallbackData[]);
   const [subjects, setSubjects] = useState([] as api.Subject[]);
@@ -18,20 +15,20 @@ export default function ChatApp(props) {
 
   // runs when app first loads, reestablishes session if possible
   useEffect(() => {
-    if (channelId && !threadId) {
-      setChannelId('');
+    if (props.channelId && !props.threadId) {
+      props.setChannelId('');
     }
-    if (threadId && channelId) {
+    if (props.threadId && props.channelId) {
       api
-        .reestablishSession(channelId, threadId)
+        .reestablishSession(props.channelId, props.threadId)
         .then((res) => {
           setName(res.name);
-          setChannelId(res.subject.id);
+          props.setChannelId(res.subject.id);
           setMessages(res.messages);
         })
         .catch((err) => {
-          setChannelId('');
-          setThreadId('');
+          props.setChannelId('');
+          props.setThreadId('');
           console.log(err);
         })
         .finally(() => {
@@ -49,14 +46,15 @@ export default function ChatApp(props) {
   }, []);
 
   function onSubjectSelect(subject: api.Subject) {
-    let firstVisit = allChats === undefined;
+    let firstVisit = props.allChats === undefined;
+    console.log('onSubjectSelecKörs');
     if (firstVisit) {
-      setAllChats(
+      props.setAllChats(
         `{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : [${false}]}`
       );
       props.setIndex('0');
     }
-    setChannelId(subject.id);
+    props.setChannelId(subject.id);
     setLoading(true);
 
     api
@@ -67,7 +65,7 @@ export default function ChatApp(props) {
       })
       .finally(() => {
         setLoading(false);
-        setThreadId('');
+        props.setThreadId('');
       });
   }
 
@@ -75,13 +73,13 @@ export default function ChatApp(props) {
     let isFirstMessage = messages.length === 0;
     api.sendMessage(text, image).then((threadId) => {
       if (isFirstMessage) {
-        setThreadId(threadId);
-        let allChatsObject = allChats;
+        props.setThreadId(threadId);
+        let allChatsObject = props.allChats;
         allChatsObject.allThreadIds[props.index] = threadId;
-        allChatsObject.allChannelIds[props.index] = channelId;
+        allChatsObject.allChannelIds[props.index] = props.channelId;
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
-        setAllChats(allChatsObject);
+        props.setAllChats(allChatsObject);
         //skapa list item. ta med text, index, image
       }
     });
@@ -109,31 +107,31 @@ export default function ChatApp(props) {
   }
 
   function onNewQuestion() {
-    setChannelId('');
-    setThreadId('');
+    props.setChannelId('');
+    props.setThreadId('');
     setMessages([]);
-    let allChatsObject = allChats;
+    let allChatsObject = props.allChats;
     allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat('');
     allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat('');
     allChatsObject.checkmark = allChatsObject.checkmark.concat(false);
     props.setIndex(allChatsObject.allThreadIds.length - 1);
-    setAllChats(allChatsObject);
+    props.setAllChats(allChatsObject);
     api.cancelSession();
   }
   function onCheckmark() {
-    let allChatsObject = allChats;
-    console.log(allChats);
+    let allChatsObject = props.allChats;
+    console.log(props.allChats);
     if (
       allChatsObject.allThreadIds[props.index] !== '' &&
       allChatsObject.allThreadIds.length !== 0
     ) {
       allChatsObject.checkmark[props.index] = true;
-      setAllChats(allChatsObject);
+      props.setAllChats(allChatsObject);
     } else {
       console.log('No question yet');
     }
   }
-  const subject = subjects.find((s) => s.id === channelId);
+  const subject = subjects.find((s) => s.id === props.channelId);
 
   const showPopup = !name && !loading;
   const showSubjectList = !subject && !showPopup && !loading;
@@ -154,7 +152,7 @@ export default function ChatApp(props) {
           onSendMessage={onSendMessage}
           onNewQuestionClick={onNewQuestion}
           index={props.index}
-          allChats={allChats}
+          allChats={props.allChats}
           onCheckmarkClick={onCheckmark}
         />
       </div>

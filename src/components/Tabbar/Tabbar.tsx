@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import Calculator from '../Calculator/Calculator';
@@ -18,11 +18,19 @@ export default function Tabbar() {
   const [allChats, setAllChats] = useCookie('allChats');
   const setAllChatsChild = (allChatsChild) => setAllChats(allChatsChild);
 
+  const goToChat = (itemIndex) => {
+    setThreadId(allChats.allThreadIds[itemIndex]);
+    setChannelId(allChats.allChannelIds[itemIndex]);
+    setIndex(itemIndex);
+  };
+
   return (
     <Router>
       <div id="site-wrapper">
         <Switch>
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile">
+            <Profile goToChat={goToChat} />
+          </Route>
           <Route exact path="/calculator" component={Calculator} />
           <Route exact path="/formulasheet" component={Formulasheet} />
           <Route exact path="/chat">
