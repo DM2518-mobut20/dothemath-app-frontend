@@ -4,9 +4,10 @@ import Profile from '../Profile/Profile';
 import Calculator from '../Calculator/Calculator';
 import Formulasheet from '../Formulasheet/Formulasheet';
 import ChatApp from '../ChatApp/ChatApp';
+import { useCookie } from '../../useCookie';
 
 export default function Tabbar() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useCookie('index');
 
   function setIndexOnNewMessage(indexNumber: number) {
     setIndex(indexNumber);
