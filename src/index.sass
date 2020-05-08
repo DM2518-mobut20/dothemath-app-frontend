@@ -189,7 +189,11 @@ button
     background: #08e511
     border: 3px solid #34AE21
     border-radius: 50%
-
+    
+.profile-item-emptycheckmark
+    background: #616161
+    border: 3px solid #000000
+    border-radius: 50%
 .profile-item-text
     width: 100%
     max-height: 80%
@@ -321,7 +325,7 @@ button
     min-height: 100vh
     padding-bottom: 80px
     h2
-        margin-bottom: .5rem
+        margin-bottom: -0.5rem
         font-size: 2.5rem
 
 #logo
@@ -466,13 +470,24 @@ button
 
 #subject-title
     display: inline
+    color: #ff00c8
+    align-self: flex-end
+    margin: 0
 
 #title-container
     width: 800px
     padding: 10px 0px
-    display: inline-block
-    text-align: center
-
+    display: flex
+    justify-content: space-between
+    align-items: center
+    #chat-checkmark
+        height: 50px
+        width: 50px
+        margin: 0px
+    #chat-empty-checkmark
+        height: 50px
+        width: 50px
+        margin: 0px
 #new-question-button
     background-color: $primary-color
     background-repeat: no-repeat
