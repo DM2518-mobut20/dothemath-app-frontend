@@ -53,7 +53,9 @@ export default function Chat(props: ChatProps) {
       <div id="content-wrapper">
         <div id="chat-wrapper">
           <ConversationContainer messages={messages} />
-          <InputContainer onSend={props.onSendMessage} />
+          {props.allChats.checkmark[props.index] === false && (
+            <InputContainer onSend={props.onSendMessage} />
+          )}
         </div>
       </div>
       <img
