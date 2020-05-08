@@ -123,11 +123,12 @@ export default function ChatApp(props) {
   }
   function onCheckmark() {
     let allChatsObject = allChats;
-    if (allChatsObject.allThreadIds[props.index] !== '') {
+    if (
+      allChatsObject.allThreadIds[props.index] !== '' &&
+      allChatsObject.allThreadIds.length !== 0
+    ) {
       allChatsObject.checkmark[props.index] = true;
       setAllChats(allChatsObject);
-      console.log(allChats);
-      console.log(props.index);
     } else {
       console.log('No question yet');
     }
