@@ -30,16 +30,16 @@ export default function Chat(props: ChatProps) {
   const checkedCheckmark = (
     <button id="chat-checkmark" className="profile-item-checkmark" />
   );
-  function displayCheckmark(bool) {
-    if (bool) {
+  function displayCheckmark(checked) {
+    if (checked) {
       return checkedCheckmark;
     } else {
       return emptyCheckmark;
     }
   }
 
-  function displayInputField(bool) {
-    if (bool) {
+  function displayInputField(checked) {
+    if (checked) {
       return <InputContainer onSend={props.onSendMessage} />;
     }
   }
