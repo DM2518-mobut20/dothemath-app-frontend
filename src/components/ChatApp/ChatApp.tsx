@@ -82,6 +82,7 @@ export default function ChatApp(props) {
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         setAllChats(allChatsObject);
+        //skapa list item. ta med text, index, image
       }
     });
 
@@ -121,6 +122,7 @@ export default function ChatApp(props) {
   }
   function onCheckmark() {
     let allChatsObject = allChats;
+    console.log(allChats);
     if (
       allChatsObject.allThreadIds[props.index] !== '' &&
       allChatsObject.allThreadIds.length !== 0
