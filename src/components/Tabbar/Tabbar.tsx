@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import Calculator from '../Calculator/Calculator';
@@ -6,6 +6,11 @@ import Formulasheet from '../Formulasheet/Formulasheet';
 import ChatApp from '../ChatApp/ChatApp';
 
 export default function Tabbar() {
+  const [index, setIndex] = useState(0);
+
+  function setIndexOnNewMessage(indexNumber: number) {
+    setIndex(indexNumber);
+  }
   return (
     <Router>
       <div id="site-wrapper">
@@ -13,7 +18,9 @@ export default function Tabbar() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/calculator" component={Calculator} />
           <Route exact path="/formulasheet" component={Formulasheet} />
-          <Route exact path="/chat" component={ChatApp} />
+          <Route exact path="/chat">
+            <ChatApp index={index} setIndex={setIndexOnNewMessage} />
+          </Route>
         </Switch>
         <div id="tab-bar">
           <div>

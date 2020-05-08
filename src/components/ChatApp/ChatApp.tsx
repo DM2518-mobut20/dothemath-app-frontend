@@ -6,7 +6,7 @@ import Chat from '../Chat';
 import LoadingIndicator from '../LoadingIndicator';
 import { useCookie } from '../../useCookie';
 
-export default function ChatApp() {
+export default function ChatApp(props) {
   const [name, setName] = useCookie('name');
   const [threadId, setThreadId] = useCookie('threadId');
   const [channelId, setChannelId] = useCookie('channelId');
@@ -52,7 +52,7 @@ export default function ChatApp() {
     let firstVisit = allChats === undefined;
     if (firstVisit) {
       setAllChats(
-        '{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkbox" : []}'
+        `{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : [${false}]}`
       );
     }
     setChannelId(subject.id);
@@ -76,16 +76,12 @@ export default function ChatApp() {
       if (isFirstMessage) {
         setThreadId(threadId);
         let allChatsObject = allChats;
-        allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat(
-          threadId
-        );
-        allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat(
-          channelId
-        );
-        allChatsObject.checkbox = allChatsObject.checkbox.concat(false);
+        allChatsObject.allThreadIds[props.index] = threadId;
+        allChatsObject.allChannelIds[props.index] = channelId;
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         setAllChats(allChatsObject);
+        console.log(props.index);
         console.log(allChats);
       }
     });
@@ -116,9 +112,27 @@ export default function ChatApp() {
     setChannelId('');
     setThreadId('');
     setMessages([]);
+    let allChatsObject = allChats;
+    allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat('');
+    allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat('');
+    allChatsObject.checkmark = allChatsObject.checkmark.concat(false);
+    props.setIndex(allChatsObject.allThreadIds.length - 1);
+    setAllChats(allChatsObject);
+    console.log(allChats);
     api.cancelSession();
   }
-
+  function onCheckmark() {
+    let allChatsObject = allChats;
+    if (
+      allChatsObject.allThreadIds[props.index] !== '' &&
+      allChatsObject.allThreadIds.length !== 0
+    ) {
+      allChatsObject.checkmark[props.index] = true;
+      setAllChats(allChatsObject);
+    } else {
+      console.log('No question yet');
+    }
+  }
   const subject = subjects.find((s) => s.id === channelId);
 
   const showPopup = !name && !loading;
@@ -139,6 +153,9 @@ export default function ChatApp() {
           messages={messages}
           onSendMessage={onSendMessage}
           onNewQuestionClick={onNewQuestion}
+          index={props.index}
+          allChats={allChats}
+          onCheckmarkClick={onCheckmark}
         />
       </div>
     </div>
