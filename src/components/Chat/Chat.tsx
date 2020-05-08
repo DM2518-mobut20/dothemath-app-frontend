@@ -37,6 +37,12 @@ export default function Chat(props: ChatProps) {
       return emptyCheckmark;
     }
   }
+
+  function displayInputField(bool) {
+    if (bool) {
+      return <InputContainer onSend={props.onSendMessage} />;
+    }
+  }
   return (
     <div id="window-wrapper">
       <div id="title-container">
@@ -53,9 +59,11 @@ export default function Chat(props: ChatProps) {
       <div id="content-wrapper">
         <div id="chat-wrapper">
           <ConversationContainer messages={messages} />
-          {props.allChats.checkmark[props.index] === false && (
-            <InputContainer onSend={props.onSendMessage} />
-          )}
+          {props.allChats === undefined
+            ? displayInputField(true)
+            : props.allChats.checkmark[props.index]
+            ? displayInputField(false)
+            : displayInputField(true)}
         </div>
       </div>
       <img
