@@ -8,10 +8,16 @@ import { useCookie } from '../../useCookie';
 
 export default function Tabbar() {
   const [index, setIndex] = useCookie('index');
-
   function setIndexOnNewMessage(indexNumber: number) {
     setIndex(indexNumber);
   }
+  const [threadId, setThreadId] = useCookie('threadId');
+  const setThreadIdChild = (threadIdChild) => setThreadId(threadIdChild);
+  const [channelId, setChannelId] = useCookie('channelId');
+  const setChannelIdChild = (channelIdChild) => setChannelId(channelIdChild);
+  const [allChats, setAllChats] = useCookie('allChats');
+  const setAllChatsChild = (allChatsChild) => setAllChats(allChatsChild);
+
   return (
     <Router>
       <div id="site-wrapper">
