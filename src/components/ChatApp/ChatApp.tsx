@@ -123,10 +123,14 @@ export default function ChatApp(props) {
   }
   function onCheckmark() {
     let allChatsObject = allChats;
-    allChatsObject.checkmark[props.index] = true;
-    setAllChats(allChatsObject);
-    console.log(allChats);
-    console.log(props.index);
+    if (allChatsObject.allThreadIds[props.index] !== '') {
+      allChatsObject.checkmark[props.index] = true;
+      setAllChats(allChatsObject);
+      console.log(allChats);
+      console.log(props.index);
+    } else {
+      console.log('No question yet');
+    }
   }
   const subject = subjects.find((s) => s.id === channelId);
 
