@@ -82,8 +82,6 @@ export default function ChatApp(props) {
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         setAllChats(allChatsObject);
-        console.log(props.index);
-        console.log(allChats);
       }
     });
 
@@ -119,7 +117,6 @@ export default function ChatApp(props) {
     allChatsObject.checkmark = allChatsObject.checkmark.concat(false);
     props.setIndex(allChatsObject.allThreadIds.length - 1);
     setAllChats(allChatsObject);
-    console.log(allChats);
     api.cancelSession();
   }
   function onCheckmark() {
