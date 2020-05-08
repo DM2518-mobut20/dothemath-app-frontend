@@ -54,6 +54,7 @@ export default function ChatApp(props) {
       setAllChats(
         `{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : [${false}]}`
       );
+      props.setIndex('0');
     }
     setChannelId(subject.id);
     setLoading(true);
