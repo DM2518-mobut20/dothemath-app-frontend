@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router, Route, Link, Switch } from 'react-router-dom';
-import { withRouter } from 'react-router';
 import Profile from '../Profile/Profile';
 import Calculator from '../Calculator/Calculator';
 import Formulasheet from '../Formulasheet/Formulasheet';
