@@ -1,10 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Router, Route, Link, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import Profile from '../Profile/Profile';
 import Calculator from '../Calculator/Calculator';
 import Formulasheet from '../Formulasheet/Formulasheet';
 import ChatApp from '../ChatApp/ChatApp';
 import { useCookie } from '../../useCookie';
+import history from './history';
 
 export default function Tabbar() {
   const [index, setIndex] = useCookie('index');
@@ -22,17 +24,20 @@ export default function Tabbar() {
     setThreadId(allChats.allThreadIds[itemIndex]);
     setChannelId(allChats.allChannelIds[itemIndex]);
     setIndex(itemIndex);
+    history.push('/chat');
   };
 
   return (
-    <Router>
+    <Router history={history}>
       <div id="site-wrapper">
         <Switch>
           <Route exact path="/profile">
             <Profile goToChat={goToChat} />
           </Route>
           <Route exact path="/calculator" component={Calculator} />
-          <Route exact path="/formulasheet" component={Formulasheet} />
+          <Route exact path="/formulasheet">
+            <Formulasheet goToChat={goToChat} />
+          </Route>
           <Route exact path="/chat">
             <ChatApp
               index={index}
