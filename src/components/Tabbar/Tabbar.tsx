@@ -31,7 +31,7 @@ export default function Tabbar() {
       <div id="site-wrapper">
         <Switch>
           <Route exact path="/profile">
-            <Profile />
+            <Profile goToChat={goToChat} />
           </Route>
           <Route exact path="/calculator" component={Calculator} />
           <Route exact path="/formulasheet">

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Item(props) {
   return (
-    <div className="profile-item">
+    <div className="profile-item" onClick={() => props.goToChat(0)}>
       {props.checkmark ? (
         <div className="profile-item-checkmark" />
       ) : (

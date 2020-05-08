@@ -1,8 +1,9 @@
 import React from 'react';
 import Item from './Item';
 import Header from './Header';
+import { prependOnceListener } from 'cluster';
 
-export default function Profile() {
+export default function Profile(props) {
   // Temporary posts-data before we get real data from the backend
   const posts = [
     {
@@ -47,6 +48,7 @@ export default function Profile() {
         checkmark={post.checkmark}
         text={post.text}
         imgurl={post.imgurl}
+        goToChat={props.goToChat}
       />
     );
   });
