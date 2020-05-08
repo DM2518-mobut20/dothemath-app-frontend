@@ -38,7 +38,7 @@ export default function Profile() {
   ];
 
   const profilePic =
-    'https://cdn.mos.cms.futurecdn.net/xYiTisbsp2HZPVupAZoNYQ-650-80.jpg';
+    process.env.PUBLIC_URL + './img/student_avatars/student1.png';
 
   const items = posts.map((post) => {
     return (
