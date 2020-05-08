@@ -36,7 +36,7 @@ export default function Tabbar() {
           </Route>
           <Route exact path="/calculator" component={Calculator} />
           <Route exact path="/formulasheet">
-            <Formulasheet goToChat={goToChat} />
+            <Formulasheet />
           </Route>
           <Route exact path="/chat">
             <ChatApp
