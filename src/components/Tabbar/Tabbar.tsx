@@ -18,10 +18,14 @@ export default function Tabbar() {
   const setChannelIdChild = (channelIdChild) => setChannelId(channelIdChild);
   const [allChats, setAllChats] = useCookie('allChats');
   const setAllChatsChild = (allChatsChild) => setAllChats(allChatsChild);
+  const [allChatsArray, setAllChatsArray] = useCookie('allChatsArray');
+  const setAllChatsArrayChild = (allChatsArrayChild) =>
+    setAllChatsArray(allChatsArrayChild);
 
   const goToChat = (itemIndex) => {
-    setThreadId(allChats.allThreadIds[itemIndex]);
-    setChannelId(allChats.allChannelIds[itemIndex]);
+    console.log(itemIndex);
+    setThreadId(allChatsArray[itemIndex].threadId);
+    setChannelId(allChatsArray[itemIndex].channelId);
     setIndex(itemIndex);
     history.push('/chat');
   };
@@ -31,7 +35,11 @@ export default function Tabbar() {
       <div id="site-wrapper">
         <Switch>
           <Route exact path="/profile">
-            <Profile goToChat={goToChat} />
+            <Profile
+              goToChat={goToChat}
+              allChatsArray={allChatsArray}
+              index={index}
+            />
           </Route>
           <Route exact path="/calculator" component={Calculator} />
           <Route exact path="/formulasheet">
@@ -47,6 +55,8 @@ export default function Tabbar() {
               setChannelId={setChannelIdChild}
               allChats={allChats}
               setAllChats={setAllChatsChild}
+              allChatsArray={allChatsArray}
+              setAllChatsArray={setAllChatsArrayChild}
             />
           </Route>
         </Switch>

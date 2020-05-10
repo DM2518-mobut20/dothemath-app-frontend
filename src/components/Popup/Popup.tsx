@@ -9,7 +9,7 @@ export function Popup(props: PopupProps) {
   const [nickname, setNickname] = useState('');
   const [acceptCookies, setAcceptCookies] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [passCaptcha, setPassCaptcha] = useState(false);
+  const [passCaptcha, setPassCaptcha] = useState(true);
 
   function capchaChange(value) {
     setPassCaptcha(value);
@@ -51,11 +51,11 @@ export function Popup(props: PopupProps) {
             />
             <span>I agree to the terms of service</span>
           </div>
-          <ReCAPTCHA
+          {/* <ReCAPTCHA
             sitekey="6LdJiugUAAAAABme_rVvdcwmRAyQ0f8Fq7nMubcO"
             onChange={capchaChange}
             style={{ marginBottom: '1rem' }}
-          />
+          /> */}
           <button
             id="enter-name-btn"
             className="btn--primary"

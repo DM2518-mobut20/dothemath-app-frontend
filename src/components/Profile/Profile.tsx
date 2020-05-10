@@ -40,17 +40,20 @@ export default function Profile(props) {
   const profilePic =
     process.env.PUBLIC_URL + './img/student_avatars/student1.png';
 
-  const items = posts.map((post) => {
-    return (
-      <Item
-        key={post.id}
-        checkmark={post.checkmark}
-        text={post.text}
-        imgurl={post.imgurl}
-        goToChat={props.goToChat}
-      />
-    );
-  });
+  const items =
+    props.allChatsArray &&
+    props.allChatsArray.map((post, index) => {
+      return (
+        <Item
+          key={index}
+          index={index}
+          checkmark={post.checkmark}
+          text={post.text}
+          imgurl={post.imgURL}
+          goToChat={props.goToChat}
+        />
+      );
+    });
 
   return (
     <div>

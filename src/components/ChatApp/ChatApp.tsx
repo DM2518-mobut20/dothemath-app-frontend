@@ -47,11 +47,22 @@ export default function ChatApp(props) {
 
   function onSubjectSelect(subject: api.Subject) {
     let firstVisit = props.allChats === undefined;
-    console.log('onSubjectSelecKörs');
     if (firstVisit) {
       props.setAllChats(
         `{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : [${false}]}`
       );
+      // new
+      props.setAllChatsArray([
+        {
+          threadId: '',
+          channelId: '',
+          text: '',
+          imageURL: '',
+          checkmark: false,
+        },
+      ]);
+      //new
+
       props.setIndex('0');
     }
     props.setChannelId(subject.id);
@@ -80,6 +91,19 @@ export default function ChatApp(props) {
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         props.setAllChats(allChatsObject);
+        //new
+        let allChatsArrayObject = props.allChatsArray;
+        console.log(props.allChatsArray);
+        allChatsArrayObject[props.index] = {
+          threadId: threadId,
+          channelId: props.channelId,
+          text: text,
+          imageURL: '',
+          checkmark: false,
+        };
+        props.setAllChatsArray(allChatsArrayObject);
+        console.log(props.allChatsArray);
+        //new
       }
     });
 
@@ -109,15 +133,20 @@ export default function ChatApp(props) {
     props.setChannelId('');
     props.setThreadId('');
     setMessages([]);
-    let allChatsObject = props.allChats;
-    allChatsObject.allThreadIds = allChatsObject.allThreadIds.concat('');
-    allChatsObject.allChannelIds = allChatsObject.allChannelIds.concat('');
-    allChatsObject.checkmark = allChatsObject.checkmark.concat(false);
-    props.setIndex(allChatsObject.allThreadIds.length - 1);
-    props.setAllChats(allChatsObject);
+    props.setIndex(props.allChatsArray.length);
     api.cancelSession();
   }
   function onCheckmark() {
+    let allChatsArrayObject = props.allChatsArray;
+    if (
+      allChatsArrayObject[props.index].threadId !== '' &&
+      allChatsArrayObject.length !== 0
+    ) {
+      allChatsArrayObject[props.index].checkmark = true;
+      props.setAllChatsArray(allChatsArrayObject);
+    } else {
+      console.log('No question yet');
+    }
     let allChatsObject = props.allChats;
     if (
       allChatsObject.allThreadIds[props.index] !== '' &&
