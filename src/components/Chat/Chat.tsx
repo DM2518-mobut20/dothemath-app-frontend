@@ -25,21 +25,33 @@ export default function Chat(props: ChatProps) {
       id="chat-empty-checkmark"
       className="profile-item-emptycheckmark"
       onClick={props.onCheckmarkClick}
-    />
+    >
+      <img
+        src="icons/check-mark-3-512.png"
+        style={{ width: '25px' }}
+        alt="checkmark-empty"
+      />
+    </button>
   );
   const checkedCheckmark = (
-    <button id="chat-checkmark" className="profile-item-checkmark" />
+    <button id="chat-checkmark" className="profile-item-checkmark">
+      <img
+        src="icons/check-mark-3-512.png"
+        alt="checkmark"
+        style={{ width: '25px' }}
+      />
+    </button>
   );
-  function displayCheckmark(bool) {
-    if (bool) {
+  function displayCheckmark(checked) {
+    if (checked) {
       return checkedCheckmark;
     } else {
       return emptyCheckmark;
     }
   }
 
-  function displayInputField(bool) {
-    if (bool) {
+  function displayInputField(checked) {
+    if (checked) {
       return <InputContainer onSend={props.onSendMessage} />;
     }
   }
