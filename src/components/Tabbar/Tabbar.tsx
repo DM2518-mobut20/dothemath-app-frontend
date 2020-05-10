@@ -1,25 +1,63 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import React from 'react';
+import { Router, Route, Link, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
 import Calculator from '../Calculator/Calculator';
 import Formulasheet from '../Formulasheet/Formulasheet';
 import ChatApp from '../ChatApp/ChatApp';
+import { useCookie } from '../../useCookie';
+import history from './history';
 
 export default function Tabbar() {
-  const [index, setIndex] = useState(0);
-
+  const [index, setIndex] = useCookie('index');
   function setIndexOnNewMessage(indexNumber: number) {
     setIndex(indexNumber);
   }
+  const [threadId, setThreadId] = useCookie('threadId');
+  const setThreadIdChild = (threadIdChild) => setThreadId(threadIdChild);
+  const [channelId, setChannelId] = useCookie('channelId');
+  const setChannelIdChild = (channelIdChild) => setChannelId(channelIdChild);
+  const [allChats, setAllChats] = useCookie('allChats');
+  const setAllChatsChild = (allChatsChild) => setAllChats(allChatsChild);
+  const [allChatsArray, setAllChatsArray] = useCookie('allChatsArray');
+  const setAllChatsArrayChild = (allChatsArrayChild) =>
+    setAllChatsArray(allChatsArrayChild);
+
+  const goToChat = (itemIndex) => {
+    console.log(itemIndex);
+    setThreadId(allChatsArray[itemIndex].threadId);
+    setChannelId(allChatsArray[itemIndex].channelId);
+    setIndex(itemIndex);
+    history.push('/chat');
+  };
+
   return (
-    <Router>
+    <Router history={history}>
       <div id="site-wrapper">
         <Switch>
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile">
+            <Profile
+              goToChat={goToChat}
+              allChatsArray={allChatsArray}
+              index={index}
+            />
+          </Route>
           <Route exact path="/calculator" component={Calculator} />
-          <Route exact path="/formulasheet" component={Formulasheet} />
+          <Route exact path="/formulasheet">
+            <Formulasheet />
+          </Route>
           <Route exact path="/chat">
-            <ChatApp index={index} setIndex={setIndexOnNewMessage} />
+            <ChatApp
+              index={index}
+              setIndex={setIndexOnNewMessage}
+              threadId={threadId}
+              setThreadId={setThreadIdChild}
+              channelId={channelId}
+              setChannelId={setChannelIdChild}
+              allChats={allChats}
+              setAllChats={setAllChatsChild}
+              allChatsArray={allChatsArray}
+              setAllChatsArray={setAllChatsArrayChild}
+            />
           </Route>
         </Switch>
         <div id="tab-bar">
