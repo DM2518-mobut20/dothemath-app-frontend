@@ -9,25 +9,20 @@ const toggleAvatarModal = (toggle, setToggle) => {
   }
 };
 
-const changeAvatar = (avatarImgUrl, setCurrentAvatar) => {
-  setCurrentAvatar(avatarImgUrl);
-};
-
 export default function Header(props) {
   const [toggle, setToggle] = useState('none');
-  const [currentAvatar, setCurrentAvatar] = useState(props.imgsrc);
   return (
     <div id="profile-header">
       <AvatarModal
         toggle={toggle}
-        changeAvatar={changeAvatar}
-        setCurrentAvatar={setCurrentAvatar}
+        changeAvatar={props.changeAvatar}
+        setCurrentAvatar={props.setCurrentAvatar}
       />
       <div
         id="profile-picture-wrapper"
         onClick={() => toggleAvatarModal(toggle, setToggle)}
       >
-        <img id="profile-picture" src={currentAvatar} alt="profile" />
+        <img id="profile-picture" src={props.currentAvatar} alt="profile" />
       </div>
       <div id="profile-info">
         <div id="profile-nameplate">
