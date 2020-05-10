@@ -91,9 +91,8 @@ export default function ChatApp(props) {
         allChatsObject.text = allChatsObject.text.concat(text);
         allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
         props.setAllChats(allChatsObject);
-        //new
+
         let allChatsArrayObject = props.allChatsArray;
-        console.log(props.allChatsArray);
         allChatsArrayObject[props.index] = {
           threadId: threadId,
           channelId: props.channelId,
@@ -102,8 +101,6 @@ export default function ChatApp(props) {
           checkmark: false,
         };
         props.setAllChatsArray(allChatsArrayObject);
-        console.log(props.allChatsArray);
-        //new
       }
     });
 
