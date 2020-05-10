@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Item(props) {
   return (
-    <div className="profile-item" onClick={() => props.goToChat(0)}>
+    <div className="profile-item" onClick={() => props.goToChat(props.index)}>
       {props.checkmark ? (
         <div className="profile-item-checkmark" />
       ) : (
@@ -10,8 +10,10 @@ export default function Item(props) {
       )}
       <div className="profile-item-text">
         <p>{props.text}</p>
-      </div>
-      <img className="profile-item-img" src={props.imgurl} alt="item-img" />
+      </div>{' '}
+      {props.imgurl && (
+        <img className="profile-item-img" src={props.imgurl} alt="item-img" />
+      )}
     </div>
   );
 }
