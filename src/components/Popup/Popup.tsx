@@ -45,11 +45,7 @@ export function Popup(props: PopupProps) {
             />
             <span>I agree to the terms of service</span>
           </div>
-          {/* <ReCAPTCHA
-            sitekey="6LdJiugUAAAAABme_rVvdcwmRAyQ0f8Fq7nMubcO"
-            onChange={capchaChange}
-            style={{ marginBottom: '1rem' }}
-          /> */}
+
           <button
             id="enter-name-btn"
             className="btn--primary"

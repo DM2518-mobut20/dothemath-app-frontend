@@ -4,7 +4,7 @@ export default function AvatarBtn(props) {
   return (
     <div
       className="profile-avatar-button"
-      onClick={() => props.changeAvatar(props.imgsrc, props.setCurrentAvatar)}
+      onClick={() => props.changeAvatar(props.imgsrc)}
     >
       <img
         src={props.imgsrc}
