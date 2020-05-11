@@ -8,12 +8,7 @@ export default function Item(props) {
           <img
             src="icons/check-mark-3-512.png"
             alt="checkmark"
-            style={{
-              width: '30px',
-              display: 'table-cell',
-              margin: 'auto',
-              marginTop: '10px',
-            }}
+            className="profile-item-checkmark-img"
           />
         </div>
       ) : (
@@ -21,12 +16,7 @@ export default function Item(props) {
           <img
             src="icons/check-mark-3-512.png"
             alt="checkmark"
-            style={{
-              width: '30px',
-              display: 'block',
-              margin: 'auto',
-              marginTop: '10px',
-            }}
+            className="profile-item-checkmark-img"
           />
         </div>
       )}
