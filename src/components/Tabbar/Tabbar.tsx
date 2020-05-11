@@ -21,15 +21,15 @@ export default function Tabbar() {
   const [allChatsArray, setAllChatsArray] = useCookie('allChatsArray');
   const setAllChatsArrayChild = (allChatsArrayChild) =>
     setAllChatsArray(allChatsArrayChild);
+  const [currentAvatar, setCurrentAvatar] = useCookie('currentAvatar');
 
   const goToChat = (itemIndex) => {
-    console.log(itemIndex);
     setThreadId(allChatsArray[itemIndex].threadId);
     setChannelId(allChatsArray[itemIndex].channelId);
     setIndex(itemIndex);
     history.push('/chat');
   };
-
+  const changeAvatar = (avatarImgUrl) => setCurrentAvatar(avatarImgUrl);
   return (
     <Router history={history}>
       <div id="site-wrapper">
@@ -39,6 +39,8 @@ export default function Tabbar() {
               goToChat={goToChat}
               allChatsArray={allChatsArray}
               index={index}
+              currentAvatar={currentAvatar}
+              changeAvatar={changeAvatar}
             />
           </Route>
           <Route exact path="/calculator" component={Calculator} />
