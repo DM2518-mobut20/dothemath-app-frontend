@@ -22,8 +22,8 @@ export default function Tabbar() {
   const setAllChatsArrayChild = (allChatsArrayChild) =>
     setAllChatsArray(allChatsArrayChild);
   const [currentAvatar, setCurrentAvatar] = useCookie('currentAvatar');
+
   const goToChat = (itemIndex) => {
-    console.log(itemIndex);
     setThreadId(allChatsArray[itemIndex].threadId);
     setChannelId(allChatsArray[itemIndex].channelId);
     setIndex(itemIndex);
