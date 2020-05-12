@@ -6,7 +6,7 @@ import Formulasheet from '../Formulasheet/Formulasheet';
 import ChatApp from '../ChatApp/ChatApp';
 import { useCookie } from '../../useCookie';
 import history from './history';
-
+import { Swipeable } from 'react-swipeable';
 export default function Tabbar() {
   const [index, setIndex] = useCookie('index');
   function setIndexOnNewMessage(indexNumber: number) {
@@ -30,36 +30,69 @@ export default function Tabbar() {
     history.push('/chat');
   };
   const changeAvatar = (avatarImgUrl) => setCurrentAvatar(avatarImgUrl);
+
+  const configProfile = {
+    preventDefaultTouchmoveEvent: true,
+    trackTouch: true,
+    onSwipedLeft: () => history.push('/calculator'),
+  };
+  const configCalculator = {
+    preventDefaultTouchmoveEvent: true,
+    trackTouch: true,
+    onSwipedLeft: () => history.push('/chat'),
+    onSwipedRight: () => history.push('/profile'),
+  };
+  const configChat = {
+    preventDefaultTouchmoveEvent: true,
+    trackTouch: true,
+    onSwipedLeft: () => history.push('/formulasheet'),
+    onSwipedRight: () => history.push('/calculator'),
+  };
+  const configFormulasheet = {
+    preventDefaultTouchmoveEvent: true,
+    trackTouch: true,
+    onSwipedRight: () => history.push('/chat'),
+  };
   return (
     <Router history={history}>
       <div id="site-wrapper">
         <Switch>
           <Route exact path="/profile">
-            <Profile
-              goToChat={goToChat}
-              allChatsArray={allChatsArray}
-              index={index}
-              currentAvatar={currentAvatar}
-              changeAvatar={changeAvatar}
-            />
+            <Swipeable {...configProfile}>
+              <Profile
+                goToChat={goToChat}
+                allChatsArray={allChatsArray}
+                index={index}
+                currentAvatar={currentAvatar}
+                changeAvatar={changeAvatar}
+              />
+            </Swipeable>
           </Route>
-          <Route exact path="/calculator" component={Calculator} />
+          <Route exact path="/calculator">
+            <Swipeable {...configCalculator}>
+              <Calculator />
+            </Swipeable>
+          </Route>
           <Route exact path="/formulasheet">
-            <Formulasheet />
+            <Swipeable {...configFormulasheet}>
+              <Formulasheet />
+            </Swipeable>
           </Route>
           <Route exact path="/chat">
-            <ChatApp
-              index={index}
-              setIndex={setIndexOnNewMessage}
-              threadId={threadId}
-              setThreadId={setThreadIdChild}
-              channelId={channelId}
-              setChannelId={setChannelIdChild}
-              allChats={allChats}
-              setAllChats={setAllChatsChild}
-              allChatsArray={allChatsArray}
-              setAllChatsArray={setAllChatsArrayChild}
-            />
+            <Swipeable {...configChat}>
+              <ChatApp
+                index={index}
+                setIndex={setIndexOnNewMessage}
+                threadId={threadId}
+                setThreadId={setThreadIdChild}
+                channelId={channelId}
+                setChannelId={setChannelIdChild}
+                allChats={allChats}
+                setAllChats={setAllChatsChild}
+                allChatsArray={allChatsArray}
+                setAllChatsArray={setAllChatsArrayChild}
+              />
+            </Swipeable>
           </Route>
         </Switch>
         <div id="tab-bar">
