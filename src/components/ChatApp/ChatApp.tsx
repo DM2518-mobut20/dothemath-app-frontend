@@ -133,24 +133,26 @@ export default function ChatApp(props) {
   }
   function onCheckmark() {
     let allChatsArrayObject = props.allChatsArray;
-    if (
-      allChatsArrayObject[props.index].threadId !== '' &&
-      allChatsArrayObject.length !== 0
-    ) {
-      allChatsArrayObject[props.index].checkmark = true;
-      props.setAllChatsArray(allChatsArrayObject);
-    } else {
-      console.log('No question yet');
-    }
-    let allChatsObject = props.allChats;
-    if (
-      allChatsObject.allThreadIds[props.index] !== '' &&
-      allChatsObject.allThreadIds.length !== 0
-    ) {
-      allChatsObject.checkmark[props.index] = true;
-      props.setAllChats(allChatsObject);
-    } else {
-      console.log('No question yet');
+    if (allChatsArrayObject[props.index] !== undefined) {
+      if (
+        allChatsArrayObject[props.index].threadId !== '' &&
+        allChatsArrayObject.length !== 0
+      ) {
+        allChatsArrayObject[props.index].checkmark = true;
+        props.setAllChatsArray(allChatsArrayObject);
+      } else {
+        console.log('No question yet');
+      }
+      let allChatsObject = props.allChats;
+      if (
+        allChatsObject.allThreadIds[props.index] !== '' &&
+        allChatsObject.allThreadIds.length !== 0
+      ) {
+        allChatsObject.checkmark[props.index] = true;
+        props.setAllChats(allChatsObject);
+      } else {
+        console.log('No question yet');
+      }
     }
   }
   const subject = subjects.find((s) => s.id === props.channelId);
