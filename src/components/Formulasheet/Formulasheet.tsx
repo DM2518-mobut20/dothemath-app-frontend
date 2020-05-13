@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, animateScroll as scroll } from 'react-scroll';
 import FormulaSection from './FormulaSection';
 
 const text0 = `\nEn av de mest kända matematiska satserna är den så kallade Pythagoras sats, som ger oss
