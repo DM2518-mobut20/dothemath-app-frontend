@@ -48,7 +48,7 @@ export default function Formulasheet() {
       <FormulaSection
         title="1. Pythagoras Sats"
         info={text0}
-        image="null"
+        image="pythagoras-sats.png"
         id="formula-section"
       />
     </div>
