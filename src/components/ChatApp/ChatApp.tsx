@@ -51,7 +51,6 @@ export default function ChatApp(props) {
       props.setAllChats(
         `{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : [${false}]}`
       );
-      // new
       props.setAllChatsArray([
         {
           threadId: '',
@@ -61,7 +60,6 @@ export default function ChatApp(props) {
           checkmark: false,
         },
       ]);
-      //new
 
       props.setIndex('0');
     }
