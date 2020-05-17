@@ -83,9 +83,7 @@ export const Popup = (props: PopupProps) => {
           <Button
             primary
             onClick={() => props.onComplete(nickname)}
-            disabled={
-              !(nickname && acceptCookies && acceptTerms && passCaptcha)
-            }
+            disabled={!(nickname && acceptCookies && acceptTerms)}
           >
             Börja
           </Button>
