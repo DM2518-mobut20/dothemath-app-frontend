@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './components/App';
+import { Tabbar } from './components/Tabbar';
 import './index.sass';
 import * as Sentry from '@sentry/browser';
 
@@ -11,7 +11,7 @@ Sentry.init({
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Tabbar />
   </React.StrictMode>,
   document.getElementById('root')
 );
