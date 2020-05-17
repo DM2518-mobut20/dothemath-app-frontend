@@ -6,7 +6,7 @@ import Formulasheet from '../Formulasheet/Formulasheet';
 import ChatApp from '../ChatApp/ChatApp';
 import { useCookie } from '../../useCookie';
 import history from './history';
-
+import { ErrorBoundary } from '../ErrorBoundary';
 export function Tabbar() {
   const [index, setIndex] = useCookie('index');
   function setIndexOnNewMessage(indexNumber: number) {
@@ -31,68 +31,70 @@ export function Tabbar() {
   };
   const changeAvatar = (avatarImgUrl) => setCurrentAvatar(avatarImgUrl);
   return (
-    <Router history={history}>
-      <div id="site-wrapper">
-        <Switch>
-          <Route exact path="/profile">
-            <Profile
-              goToChat={goToChat}
-              allChatsArray={allChatsArray}
-              index={index}
-              currentAvatar={currentAvatar}
-              changeAvatar={changeAvatar}
-            />
-          </Route>
-          <Route exact path="/calculator" component={Calculator} />
-          <Route exact path="/formulasheet">
-            <Formulasheet />
-          </Route>
-          <Route exact path="/chat">
-            <ChatApp
-              index={index}
-              setIndex={setIndexOnNewMessage}
-              threadId={threadId}
-              setThreadId={setThreadIdChild}
-              channelId={channelId}
-              setChannelId={setChannelIdChild}
-              allChats={allChats}
-              setAllChats={setAllChatsChild}
-              allChatsArray={allChatsArray}
-              setAllChatsArray={setAllChatsArrayChild}
-            />
-          </Route>
-        </Switch>
-        <div id="tab-bar">
-          <div>
-            <Link to="/profile">
-              <button>
-                <img src="/icons/student-512.png" alt="profile"></img>
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link to="/calculator">
-              <button>
-                <img src="/icons/calculator-5-512.png" alt="calculator"></img>
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link to="/chat">
-              <button>
-                <img src="/icons/chat-4-512.png" alt="chat"></img>
-              </button>
-            </Link>
-          </div>
-          <div>
-            <Link to="/formulasheet">
-              <button>
-                <img src="/icons/note-2-512.png" alt="formula sheet"></img>
-              </button>
-            </Link>
+    <ErrorBoundary>
+      <Router history={history}>
+        <div id="site-wrapper">
+          <Switch>
+            <Route exact path="/profile">
+              <Profile
+                goToChat={goToChat}
+                allChatsArray={allChatsArray}
+                index={index}
+                currentAvatar={currentAvatar}
+                changeAvatar={changeAvatar}
+              />
+            </Route>
+            <Route exact path="/calculator" component={Calculator} />
+            <Route exact path="/formulasheet">
+              <Formulasheet />
+            </Route>
+            <Route exact path="/chat">
+              <ChatApp
+                index={index}
+                setIndex={setIndexOnNewMessage}
+                threadId={threadId}
+                setThreadId={setThreadIdChild}
+                channelId={channelId}
+                setChannelId={setChannelIdChild}
+                allChats={allChats}
+                setAllChats={setAllChatsChild}
+                allChatsArray={allChatsArray}
+                setAllChatsArray={setAllChatsArrayChild}
+              />
+            </Route>
+          </Switch>
+          <div id="tab-bar">
+            <div>
+              <Link to="/profile">
+                <button>
+                  <img src="/icons/student-512.png" alt="profile"></img>
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/calculator">
+                <button>
+                  <img src="/icons/calculator-5-512.png" alt="calculator"></img>
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/chat">
+                <button>
+                  <img src="/icons/chat-4-512.png" alt="chat"></img>
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/formulasheet">
+                <button>
+                  <img src="/icons/note-2-512.png" alt="formula sheet"></img>
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ErrorBoundary>
   );
 }
