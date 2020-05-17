@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Popup from '../Popup';
-import SubjectList from '../SubjectList';
+import { Popup } from '../Popup';
+import { SubjectList } from '../SubjectList';
 import * as api from '../../api';
-import Chat from '../Chat';
-import LoadingIndicator from '../LoadingIndicator';
+import { Chat } from '../Chat';
+import { LoadingIndicator } from '../LoadingIndicator';
 import { useCookie } from '../../useCookie';
 
 export default function ChatApp() {
@@ -111,7 +111,7 @@ export default function ChatApp() {
   return (
     <div>
       {loading && <LoadingIndicator loading />}
-      {showPopup && <Popup onComplete={setName} />}
+      {showPopup && <Popup onComplete={setName} useCaptcha={true} />}
       {showSubjectList && (
         <SubjectList data={subjects} onComplete={onSubjectSelect} />
       )}
