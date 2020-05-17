@@ -7,6 +7,7 @@ import ChatApp from '../ChatApp/ChatApp';
 import { useCookie } from '../../useCookie';
 import history from './history';
 import { ErrorBoundary } from '../ErrorBoundary';
+
 export function Tabbar() {
   const [index, setIndex] = useCookie('index');
   function setIndexOnNewMessage(indexNumber: number) {
