@@ -582,7 +582,7 @@ button
     #profile-wrapper
         padding-bottom: 44px
     #window-wrapper
-        padding-bottom: 20vh
+        padding-bottom: 24vh
 @media screen and ( max-width: 470px )
     #popup-container
         h3
@@ -597,11 +597,14 @@ button
         button
             margin: .5rem 0
             width: 100%
+    #tab-bar
+        button
+            margin-bottom: 20px
+            img
+                width: 40px
+    #calculator-wrapper
+        padding-bottom: 74px
 
-@media screen and ( max-width: 470px )
-    #popup-container
-        h3
-            font-size: 1.5rem
-        input
-            font-size: 1rem
-    
+@media all and (display-mode: standalone) 
+  #window-wrapper
+        padding-bottom: 10vh
