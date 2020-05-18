@@ -28,10 +28,6 @@ export default function Header(props) {
         <div id="profile-nameplate">
           <p>{props.name}</p>
         </div>
-        <p>Lvl {props.level}</p>
-        <div id="profile-levelbar">
-          <div id="profile-levelprogress" />
-        </div>
       </div>
     </div>
   );
