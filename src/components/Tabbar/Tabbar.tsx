@@ -1,8 +1,6 @@
 import React from 'react';
 import { Router, Route, Link, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
-import Calculator from '../Calculator/Calculator';
-import Formulasheet from '../Formulasheet/Formulasheet';
 import ChatApp from '../ChatApp/ChatApp';
 import { useCookie } from '../../useCookie';
 import history from './history';
@@ -45,10 +43,6 @@ export function Tabbar() {
                 changeAvatar={changeAvatar}
               />
             </Route>
-            <Route exact path="/calculator" component={Calculator} />
-            <Route exact path="/formulasheet">
-              <Formulasheet />
-            </Route>
             <Route exact path="/chat">
               <ChatApp
                 index={index}
@@ -73,23 +67,9 @@ export function Tabbar() {
               </Link>
             </div>
             <div>
-              <Link to="/calculator">
-                <button>
-                  <img src="/icons/calculator-5-512.png" alt="calculator"></img>
-                </button>
-              </Link>
-            </div>
-            <div>
               <Link to="/chat">
                 <button>
                   <img src="/icons/chat-4-512.png" alt="chat"></img>
-                </button>
-              </Link>
-            </div>
-            <div>
-              <Link to="/formulasheet">
-                <button>
-                  <img src="/icons/note-2-512.png" alt="formula sheet"></img>
                 </button>
               </Link>
             </div>
