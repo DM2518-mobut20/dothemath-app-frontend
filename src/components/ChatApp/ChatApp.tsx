@@ -4,7 +4,6 @@ import { SubjectList } from '../SubjectList';
 import * as api from '../../api';
 import { Chat } from '../Chat';
 import { LoadingIndicator } from '../LoadingIndicator';
-import { useCookie } from '../../useCookie';
 
 export const ChatApp = (props) => {
   const [loading, setLoading] = useState(true);
