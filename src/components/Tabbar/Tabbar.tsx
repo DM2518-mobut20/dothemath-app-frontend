@@ -7,20 +7,12 @@ import history from './history';
 import { ErrorBoundary } from '../ErrorBoundary';
 
 export const Tabbar = () => {
-  const [name2, setName2] = useCookie('name');
-  const setNameChild = (nameChild) => setName2(nameChild);
-
+  const [name, setName] = useCookie('name');
   const [index, setIndex] = useCookie('index');
-  const setIndexOnNewMessage = (indexNumber: number) => {
-    setIndex(indexNumber);
-  };
+
   const [threadId, setThreadId] = useCookie('threadId');
-  const setThreadIdChild = (threadIdChild) => setThreadId(threadIdChild);
   const [channelId, setChannelId] = useCookie('channelId');
-  const setChannelIdChild = (channelIdChild) => setChannelId(channelIdChild);
   const [allChatsArray, setAllChatsArray] = useCookie('allChatsArray');
-  const setAllChatsArrayChild = (allChatsArrayChild) =>
-    setAllChatsArray(allChatsArrayChild);
   const [currentAvatar, setCurrentAvatar] = useCookie('currentAvatar');
 
   const goToChat = (itemIndex) => {
@@ -42,21 +34,21 @@ export const Tabbar = () => {
                 index={index}
                 currentAvatar={currentAvatar}
                 changeAvatar={changeAvatar}
-                name={name2}
+                name={name}
               />
             </Route>
             <Route exact path="/">
               <ChatApp
                 index={index}
-                setIndex={setIndexOnNewMessage}
+                setIndex={setIndex}
                 threadId={threadId}
-                setThreadId={setThreadIdChild}
+                setThreadId={setThreadId}
                 channelId={channelId}
-                setChannelId={setChannelIdChild}
+                setChannelId={setChannelId}
                 allChatsArray={allChatsArray}
-                setAllChatsArray={setAllChatsArrayChild}
-                name={name2}
-                setName={setName2}
+                setAllChatsArray={setAllChatsArray}
+                name={name}
+                setName={setName}
               />
             </Route>
           </Switch>
