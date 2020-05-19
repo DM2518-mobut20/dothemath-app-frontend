@@ -1,16 +1,16 @@
 import React from 'react';
 import { Router, Route, Link, Switch } from 'react-router-dom';
 import Profile from '../Profile/Profile';
-import ChatApp from '../ChatApp/ChatApp';
+import { ChatApp } from '../ChatApp/ChatApp';
 import { useCookie } from '../../useCookie';
 import history from './history';
 import { ErrorBoundary } from '../ErrorBoundary';
 
-export function Tabbar() {
+export const Tabbar = () => {
   const [index, setIndex] = useCookie('index');
-  function setIndexOnNewMessage(indexNumber: number) {
+  const setIndexOnNewMessage = (indexNumber: number) => {
     setIndex(indexNumber);
-  }
+  };
   const [threadId, setThreadId] = useCookie('threadId');
   const setThreadIdChild = (threadIdChild) => setThreadId(threadIdChild);
   const [channelId, setChannelId] = useCookie('channelId');
@@ -74,4 +74,4 @@ export function Tabbar() {
       </Router>
     </ErrorBoundary>
   );
-}
+};

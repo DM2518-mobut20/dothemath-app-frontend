@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatApp from './ChatApp';
+import { ChatApp } from './ChatApp';
 
 export default {
   title: 'ChatApp',

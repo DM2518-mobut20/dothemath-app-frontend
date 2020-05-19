@@ -6,11 +6,14 @@ import { Chat } from '../Chat';
 import { LoadingIndicator } from '../LoadingIndicator';
 import { useCookie } from '../../useCookie';
 
-export default function ChatApp(props) {
+export const ChatApp = (props) => {
   const [name, setName] = useCookie('name');
+
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([] as api.OnMessageCallbackData[]);
+
   const [subjects, setSubjects] = useState([] as api.Subject[]);
+
   useEffect(() => api.getSubjects(setSubjects), []);
 
   // runs when app first loads, reestablishes session if possible
@@ -45,7 +48,7 @@ export default function ChatApp(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function onSubjectSelect(subject: api.Subject) {
+  const onSubjectSelect = (subject: api.Subject) => {
     let firstVisit = props.allChatsArray === undefined;
     if (firstVisit) {
       props.setAllChatsArray([
@@ -73,9 +76,9 @@ export default function ChatApp(props) {
         setLoading(false);
         props.setThreadId('');
       });
-  }
+  };
 
-  function onSendMessage(text: string, image?: File) {
+  const onSendMessage = (text: string, image?: File) => {
     let isFirstMessage = messages.length === 0;
     api.sendMessage(text, image).then((threadId) => {
       if (isFirstMessage) {
@@ -112,9 +115,9 @@ export default function ChatApp(props) {
     }
 
     setMessages((messages) => [...messages, ...localMessages]);
-  }
+  };
 
-  function onNewQuestion() {
+  const onNewQuestion = () => {
     props.setChannelId('');
     props.setThreadId('');
     setMessages([]);
@@ -130,8 +133,8 @@ export default function ChatApp(props) {
     props.setAllChatsArray(allChatsArrayObject);
     props.setIndex(allChatsArrayObject.length - 1);
     api.cancelSession();
-  }
-  function onCheckmark() {
+  };
+  const onCheckmark = () => {
     let allChatsArrayObject = props.allChatsArray;
     if (allChatsArrayObject[props.index] !== undefined) {
       if (
@@ -144,7 +147,7 @@ export default function ChatApp(props) {
         console.log('No question yet');
       }
     }
-  }
+  };
   const subject = subjects.find((s) => s.id === props.channelId);
 
   const showPopup = !name && !loading;
@@ -172,4 +175,4 @@ export default function ChatApp(props) {
       </div>
     </div>
   );
-}
+};
