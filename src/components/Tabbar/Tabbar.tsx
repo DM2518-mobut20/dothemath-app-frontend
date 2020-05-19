@@ -7,6 +7,9 @@ import history from './history';
 import { ErrorBoundary } from '../ErrorBoundary';
 
 export const Tabbar = () => {
+  const [name2, setName2] = useCookie('name');
+  const setNameChild = (nameChild) => setName2(nameChild);
+
   const [index, setIndex] = useCookie('index');
   const setIndexOnNewMessage = (indexNumber: number) => {
     setIndex(indexNumber);
@@ -24,7 +27,7 @@ export const Tabbar = () => {
     setThreadId(allChatsArray[itemIndex].threadId);
     setChannelId(allChatsArray[itemIndex].channelId);
     setIndex(itemIndex);
-    history.push('/chat');
+    history.push('/');
   };
   const changeAvatar = (avatarImgUrl) => setCurrentAvatar(avatarImgUrl);
   return (
@@ -39,9 +42,10 @@ export const Tabbar = () => {
                 index={index}
                 currentAvatar={currentAvatar}
                 changeAvatar={changeAvatar}
+                name={name2}
               />
             </Route>
-            <Route exact path="/chat">
+            <Route exact path="/">
               <ChatApp
                 index={index}
                 setIndex={setIndexOnNewMessage}
@@ -51,6 +55,8 @@ export const Tabbar = () => {
                 setChannelId={setChannelIdChild}
                 allChatsArray={allChatsArray}
                 setAllChatsArray={setAllChatsArrayChild}
+                name={name2}
+                setName={setName2}
               />
             </Route>
           </Switch>
@@ -63,7 +69,7 @@ export const Tabbar = () => {
               </Link>
             </div>
             <div>
-              <Link to="/chat">
+              <Link to="/">
                 <button>
                   <img src="/icons/chat-4-512.png" alt="chat"></img>
                 </button>

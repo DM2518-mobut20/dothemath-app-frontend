@@ -26,7 +26,7 @@ export default function Profile(props) {
   return (
     <div>
       <Header
-        name="iRob#1337"
+        name={props.name}
         level={19}
         currentAvatar={props.currentAvatar}
         changeAvatar={props.changeAvatar}

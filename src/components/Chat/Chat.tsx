@@ -62,8 +62,6 @@ export const Chat = (props: ChatProps) => {
           Ställ en ny fråga
         </button>
         <h2 id="subject-title">{props.subject?.name}</h2>
-        {console.log('props.allChats: ', props.allChats)}
-        {console.log('props.index: ', props.index)}
         {props.allChats === undefined
           ? displayCheckmark(false)
           : props.allChats[props.index].checkmark

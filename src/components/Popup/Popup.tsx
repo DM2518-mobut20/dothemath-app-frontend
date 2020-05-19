@@ -72,19 +72,19 @@ export const Popup = (props: PopupProps) => {
               </Button>
             </span>
           </div>
-          {props.useCaptcha && (
+          {/* {props.useCaptcha && (
             <ReCAPTCHA
               sitekey="6LdJiugUAAAAABme_rVvdcwmRAyQ0f8Fq7nMubcO"
               onChange={(value) => setPassCaptcha(!!value)}
               // @ts-ignore
               style={{ marginBottom: '1rem' }}
             />
-          )}
+          )} */}
           <Button
             primary
             onClick={() => props.onComplete(nickname)}
             disabled={
-              !(nickname && acceptCookies && acceptTerms && passCaptcha)
+              !((nickname && acceptCookies && acceptTerms) /*&& passCaptcha*/)
             }
           >
             Börja

@@ -7,8 +7,6 @@ import { LoadingIndicator } from '../LoadingIndicator';
 import { useCookie } from '../../useCookie';
 
 export const ChatApp = (props) => {
-  const [name, setName] = useCookie('name');
-
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([] as api.OnMessageCallbackData[]);
 
@@ -25,7 +23,7 @@ export const ChatApp = (props) => {
       api
         .reestablishSession(props.channelId, props.threadId)
         .then((res) => {
-          setName(res.name);
+          props.setName(res.name);
           props.setChannelId(res.subject.id);
           setMessages(res.messages);
         })
@@ -67,7 +65,7 @@ export const ChatApp = (props) => {
     setLoading(true);
 
     api
-      .establishSession(subject.id, name)
+      .establishSession(subject.id, props.name)
       .then(() => {
         console.info('session established');
         setMessages([]);
@@ -101,7 +99,7 @@ export const ChatApp = (props) => {
       localMessages.push({
         toFrom: 'to',
         text: '',
-        name: name,
+        name: props.name,
         image: URL.createObjectURL(image),
       });
     }
@@ -110,7 +108,7 @@ export const ChatApp = (props) => {
       localMessages.push({
         toFrom: 'to',
         text,
-        name: name,
+        name: props.name,
       });
     }
 
@@ -150,20 +148,20 @@ export const ChatApp = (props) => {
   };
   const subject = subjects.find((s) => s.id === props.channelId);
 
-  const showPopup = !name && !loading;
+  const showPopup = !props.name && !loading;
   const showSubjectList = !subject && !showPopup && !loading;
   const blurChat = showPopup || showSubjectList || loading;
 
   return (
     <div>
       {loading && <LoadingIndicator loading />}
-      {showPopup && <Popup onComplete={setName} useCaptcha={true} />}
+      {showPopup && <Popup onComplete={props.setName} useCaptcha={true} />}
       {showSubjectList && (
         <SubjectList data={subjects} onComplete={onSubjectSelect} />
       )}
       <div style={blurChat ? { filter: 'blur(5px)' } : {}}>
         <Chat
-          name={name}
+          name={props.name}
           subject={subject}
           messages={messages}
           onSendMessage={onSendMessage}
