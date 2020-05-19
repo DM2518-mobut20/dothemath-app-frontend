@@ -46,11 +46,8 @@ export default function ChatApp(props) {
   }, []);
 
   function onSubjectSelect(subject: api.Subject) {
-    let firstVisit = props.allChats === undefined;
+    let firstVisit = props.allChatsArray === undefined;
     if (firstVisit) {
-      props.setAllChats(
-        `{ "allThreadIds" : [], "allChannelIds" : [], "text" : [], "imageURL" : [], "checkmark" : [${false}]}`
-      );
       props.setAllChatsArray([
         {
           threadId: '',
@@ -83,13 +80,6 @@ export default function ChatApp(props) {
     api.sendMessage(text, image).then((threadId) => {
       if (isFirstMessage) {
         props.setThreadId(threadId);
-        let allChatsObject = props.allChats;
-        allChatsObject.allThreadIds[props.index] = threadId;
-        allChatsObject.allChannelIds[props.index] = props.channelId;
-        allChatsObject.text = allChatsObject.text.concat(text);
-        allChatsObject.imageURL = allChatsObject.imageURL.concat(image);
-        props.setAllChats(allChatsObject);
-
         let allChatsArrayObject = props.allChatsArray;
         allChatsArrayObject[props.index] = {
           threadId: threadId,
@@ -128,7 +118,17 @@ export default function ChatApp(props) {
     props.setChannelId('');
     props.setThreadId('');
     setMessages([]);
-    props.setIndex(props.allChatsArray.length);
+    const emptyChatObject = {
+      threadId: '',
+      channelId: '',
+      text: '',
+      imageURL: '',
+      checkmark: false,
+    };
+    let allChatsArrayObject = props.allChatsArray;
+    allChatsArrayObject = allChatsArrayObject.concat(emptyChatObject);
+    props.setAllChatsArray(allChatsArrayObject);
+    props.setIndex(allChatsArrayObject.length - 1);
     api.cancelSession();
   }
   function onCheckmark() {
@@ -140,16 +140,6 @@ export default function ChatApp(props) {
       ) {
         allChatsArrayObject[props.index].checkmark = true;
         props.setAllChatsArray(allChatsArrayObject);
-      } else {
-        console.log('No question yet');
-      }
-      let allChatsObject = props.allChats;
-      if (
-        allChatsObject.allThreadIds[props.index] !== '' &&
-        allChatsObject.allThreadIds.length !== 0
-      ) {
-        allChatsObject.checkmark[props.index] = true;
-        props.setAllChats(allChatsObject);
       } else {
         console.log('No question yet');
       }
@@ -176,7 +166,7 @@ export default function ChatApp(props) {
           onSendMessage={onSendMessage}
           onNewQuestionClick={onNewQuestion}
           index={props.index}
-          allChats={props.allChats}
+          allChats={props.allChatsArray}
           onCheckmarkClick={onCheckmark}
         />
       </div>

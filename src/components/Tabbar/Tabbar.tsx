@@ -15,8 +15,6 @@ export function Tabbar() {
   const setThreadIdChild = (threadIdChild) => setThreadId(threadIdChild);
   const [channelId, setChannelId] = useCookie('channelId');
   const setChannelIdChild = (channelIdChild) => setChannelId(channelIdChild);
-  const [allChats, setAllChats] = useCookie('allChats');
-  const setAllChatsChild = (allChatsChild) => setAllChats(allChatsChild);
   const [allChatsArray, setAllChatsArray] = useCookie('allChatsArray');
   const setAllChatsArrayChild = (allChatsArrayChild) =>
     setAllChatsArray(allChatsArrayChild);
@@ -51,8 +49,6 @@ export function Tabbar() {
                 setThreadId={setThreadIdChild}
                 channelId={channelId}
                 setChannelId={setChannelIdChild}
-                allChats={allChats}
-                setAllChats={setAllChatsChild}
                 allChatsArray={allChatsArray}
                 setAllChatsArray={setAllChatsArrayChild}
               />

@@ -62,9 +62,11 @@ export const Chat = (props: ChatProps) => {
           Ställ en ny fråga
         </button>
         <h2 id="subject-title">{props.subject?.name}</h2>
+        {console.log('props.allChats: ', props.allChats)}
+        {console.log('props.index: ', props.index)}
         {props.allChats === undefined
           ? displayCheckmark(false)
-          : props.allChats.checkmark[props.index]
+          : props.allChats[props.index].checkmark
           ? displayCheckmark(true)
           : displayCheckmark(false)}
       </div>
@@ -73,7 +75,7 @@ export const Chat = (props: ChatProps) => {
           <ConversationContainer messages={messages} />
           {props.allChats === undefined
             ? displayInputField(true)
-            : props.allChats.checkmark[props.index]
+            : props.allChats[props.index].checkmark
             ? displayInputField(false)
             : displayInputField(true)}
         </div>
